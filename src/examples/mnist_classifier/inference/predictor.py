@@ -5,9 +5,9 @@ import tensorflow as tf
 from typing import Union, List, Dict, Any
 from pathlib import Path
 
-from src.config import Config
-from src.models.classifier import MNISTClassifier
-from src.utils.logger import get_logger
+from ..config import Config
+from ..models.classifier import MNISTClassifier
+from src.shared.utils.logger import get_logger
 
 logger = get_logger(__name__)
 

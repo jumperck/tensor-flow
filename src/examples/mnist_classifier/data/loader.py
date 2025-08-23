@@ -5,8 +5,8 @@ import tensorflow as tf
 from typing import Tuple
 from sklearn.model_selection import train_test_split
 
-from src.config import Config
-from src.utils.logger import get_logger
+from ..config import Config
+from src.shared.utils.logger import get_logger
 
 logger = get_logger(__name__)
 

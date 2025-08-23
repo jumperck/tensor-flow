@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mnist-classifier"
+name = "tensorflow-learning-examples"
 version = "1.0.0"
-description = "A modern MNIST digit classification project using TensorFlow"
+description = "A collection of TensorFlow learning examples and projects"
 authors = [{name = "Kaue Reinbold", email = "your.email@example.com"}]
 readme = "README.md"
 license = {text = "MIT"}

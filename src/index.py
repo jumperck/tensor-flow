@@ -1,7 +1,7 @@
-"""Main CLI interface for MNIST digit classifier.
+"""Main CLI interface for TensorFlow learning examples.
 
-This module provides a command-line interface for training and using
-the MNIST digit classification model.
+This module provides a command-line interface for running different
+TensorFlow learning projects and examples.
 """
 
 import sys
@@ -19,10 +19,7 @@ except ImportError as e:
     print("Try installing TensorFlow with: pip install tensorflow")
     sys.exit(1)
 
-from src.config import Config
-from src.training.trainer import Trainer
-from src.inference.predictor import MNISTPredictor
-from src.utils.logger import setup_logging, get_logger
+from src.shared.utils.logger import setup_logging, get_logger
 
 
 @click.group()
@@ -30,7 +27,7 @@ from src.utils.logger import setup_logging, get_logger
 @click.option('--log-file', default=None, help='Log file path')
 @click.pass_context
 def cli(ctx, log_level, log_file):
-    """MNIST Digit Classifier CLI."""
+    """TensorFlow Learning Examples CLI."""
     ctx.ensure_object(dict)
     
     # Setup logging
@@ -38,7 +35,116 @@ def cli(ctx, log_level, log_file):
     logger = get_logger(__name__)
     
     ctx.obj['logger'] = logger
+
+
+@cli.group(name='mnist')
+@click.pass_context
+def mnist_cli(ctx):
+    """MNIST digit classifier example."""
+    from src.examples.mnist_classifier.config import Config
     ctx.obj['config'] = Config()
+
+
+@mnist_cli.command()
+@click.option('--epochs', default=None, type=int, help='Number of training epochs')
+@click.option('--batch-size', default=None, type=int, help='Training batch size')
+@click.option('--learning-rate', default=None, type=float, help='Learning rate')
+@click.pass_context
+def train(ctx, epochs, batch_size, learning_rate):
+    """Train the MNIST classifier."""
+    config = ctx.obj['config']
+    logger = ctx.obj['logger']
+    
+    # Override config with CLI arguments
+    if epochs is not None:
+        config.training.epochs = epochs
+    if batch_size is not None:
+        config.training.batch_size = batch_size
+    if learning_rate is not None:
+        config.training.learning_rate = learning_rate
+    
+    logger.info("Starting MNIST training with configuration:")
+    logger.info(f"  Epochs: {config.training.epochs}")
+    logger.info(f"  Batch size: {config.training.batch_size}")
+    logger.info(f"  Learning rate: {config.training.learning_rate}")
+    
+    try:
+        from src.examples.mnist_classifier.training.trainer import Trainer
+        trainer = Trainer(config)
+        results = trainer.train()
+        
+        logger.info("Training completed successfully!")
+        logger.info(f"Final validation accuracy: {results.get('val_accuracy', 'N/A'):.4f}")
+        logger.info(f"Model saved to: {config.model_save_path}")
+        
+    except Exception as e:
+        logger.error(f"Training failed: {str(e)}")
+        sys.exit(1)
+
+
+@mnist_cli.command()
+@click.option('--model-path', default=None, help='Path to saved model')
+@click.option('--num-samples', default=5, type=int, help='Number of samples to predict')
+@click.pass_context
+def predict(ctx, model_path, num_samples):
+    """Make predictions using the MNIST classifier."""
+    config = ctx.obj['config']
+    logger = ctx.obj['logger']
+    
+    if model_path:
+        config.model_save_path = model_path
+    
+    logger.info(f"Making predictions with model: {config.model_save_path}")
+    logger.info(f"Number of samples: {num_samples}")
+    
+    try:
+        from src.examples.mnist_classifier.inference.predictor import MNISTPredictor
+        predictor = MNISTPredictor(config, config.model_save_path)
+        results = predictor.predict_batch(num_samples=num_samples)
+        
+        logger.info("Predictions completed successfully!")
+        for i, result in enumerate(results):
+            predicted_digit = result['predicted_class']
+            confidence = result['confidence']
+            actual_digit = result.get('actual_class', 'Unknown')
+            logger.info(f"Sample {i+1}: Predicted={predicted_digit} (confidence: {confidence:.4f}), Actual={actual_digit}")
+            
+    except Exception as e:
+        logger.error(f"Prediction failed: {str(e)}")
+        sys.exit(1)
+
+
+@mnist_cli.command()
+@click.pass_context
+def info(ctx):
+    """Show information about the MNIST classifier."""
+    config = ctx.obj['config']
+    logger = ctx.obj['logger']
+    
+    logger.info("MNIST Classifier Configuration:")
+    logger.info(f"  Model input shape: {config.model.input_shape}")
+    logger.info(f"  Hidden units: {config.model.hidden_units}")
+    logger.info(f"  Dropout rate: {config.model.dropout_rate}")
+    logger.info(f"  Number of classes: {config.model.num_classes}")
+    logger.info(f"  Model save path: {config.model_save_path}")
+
+
+@cli.command()
+def list_examples():
+    """List available TensorFlow learning examples."""
+    click.echo("Available TensorFlow Learning Examples:")
+    click.echo("")
+    click.echo("  mnist    - MNIST digit classification")
+    click.echo("           Train neural networks on handwritten digits")
+    click.echo("")
+    click.echo("Usage:")
+    click.echo("  python -m src.index mnist train     # Train MNIST classifier")
+    click.echo("  python -m src.index mnist predict   # Make predictions")
+    click.echo("  python -m src.index mnist info      # Show model info")
+
+
+if __name__ == '__main__':
+    cli()
 
 
 @cli.command()

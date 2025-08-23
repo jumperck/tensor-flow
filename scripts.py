@@ -45,13 +45,13 @@ def clean():
 
 
 def train():
-    """Train the model."""
-    subprocess.run([sys.executable, "-m", "src.index", "train"])
+    """Train the MNIST model."""
+    subprocess.run([sys.executable, "-m", "src.index", "mnist", "train"])
 
 
 def predict():
-    """Run predictions."""
-    subprocess.run([sys.executable, "-m", "src.index", "predict"])
+    """Run MNIST predictions."""
+    subprocess.run([sys.executable, "-m", "src.index", "mnist", "predict"])
 
 
 if __name__ == "__main__":

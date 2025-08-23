@@ -1,15 +1,15 @@
-# MNIST Digit Classifier
+# TensorFlow Learning Examples
 
-A modern, well-structured machine learning project for training and deploying a neural network to classify handwritten digits using the MNIST dataset.
+A collection of isolated TensorFlow learning projects for exploring different machine learning concepts and techniques.
 
 ## 🚀 Features
 
+- **Multiple Examples**: Various isolated learning projects
 - **Modern Architecture**: Built with TensorFlow 2.15+ and modern Python best practices
 - **Configurable**: Flexible configuration system using Pydantic
 - **CLI Interface**: Easy-to-use command-line interface with Click
 - **Comprehensive Logging**: Structured logging throughout the application
 - **Model Persistence**: Save and load trained models
-- **Batch Inference**: Support for both single and batch predictions
 - **Testing Suite**: Comprehensive unit tests with pytest
 - **Docker Support**: Containerized deployment ready
 
@@ -20,32 +20,39 @@ tensor-flow/
 ├── src/
 │   ├── __init__.py
 │   ├── index.py              # Main CLI interface
-│   ├── config.py             # Configuration management
-│   ├── data/
-│   │   ├── __init__.py
-│   │   └── loader.py         # Data loading and preprocessing
-│   ├── models/
-│   │   ├── __init__.py
-│   │   └── classifier.py     # Model architecture
-│   ├── training/
-│   │   ├── __init__.py
-│   │   └── trainer.py        # Training logic
-│   ├── inference/
-│   │   ├── __init__.py
-│   │   └── predictor.py      # Inference utilities
-│   └── utils/
+│   ├── shared/               # Shared utilities
+│   │   └── utils/
+│   │       ├── __init__.py
+│   │       └── logger.py     # Logging utilities
+│   └── examples/             # Learning examples
 │       ├── __init__.py
-│       └── logger.py         # Logging utilities
+│       ├── _template/        # Template for new examples
+│       └── mnist_classifier/ # MNIST digit classification
+│           ├── __init__.py
+│           ├── README.md
+│           ├── config.py     # Configuration management
+│           ├── data/
+│           │   ├── __init__.py
+│           │   └── loader.py # Data loading and preprocessing
+│           ├── models/
+│           │   ├── __init__.py
+│           │   └── classifier.py # Model architecture
+│           ├── training/
+│           │   ├── __init__.py
+│           │   └── trainer.py # Training logic
+│           └── inference/
+│               ├── __init__.py
+│               └── predictor.py # Inference utilities
 ├── tests/
 │   ├── __init__.py
 │   └── test_mnist_classifier.py
+├── models/                   # Saved models directory
+├── logs/                     # Logs directory
 ├── requirements.txt          # Production dependencies
 ├── requirements-dev.txt      # Development dependencies
 ├── pyproject.toml           # Project configuration
 ├── scripts.py               # Development scripts
-├── .env                     # Environment variables
-├── .gitignore              # Git ignore rules
-├── docker-compose.yml      # Docker configuration
+├── docker-compose.yml       # Docker configuration
 └── README.md               # This file
 ```
 
@@ -74,28 +81,25 @@ pip install -r requirements-dev.txt
 
 ## 🎯 Quick Start
 
-### Training a Model
+### List Available Examples
 ```bash
-# Basic training with default parameters
-python -m src.index train
+# See all available learning examples
+python -m src.index list-examples
+```
+
+### MNIST Digit Classification
+```bash
+# Train the MNIST classifier
+python -m src.index mnist train
 
 # Custom training parameters
-python -m src.index train --epochs 10 --batch-size 64 --learning-rate 0.001
-```
+python -m src.index mnist train --epochs 10 --batch-size 64 --learning-rate 0.001
 
-### Making Predictions
-```bash
-# Predict on 5 random test samples
-python -m src.index predict
+# Make predictions
+python -m src.index mnist predict
 
-# Predict on 10 samples with custom model
-python -m src.index predict --model-path models/my_model.h5 --num-samples 10
-```
-
-### Model Information
-```bash
-# Show model architecture and details
-python -m src.index info
+# Show model information
+python -m src.index mnist info
 ```
 
 ### CLI Help
@@ -103,29 +107,46 @@ python -m src.index info
 # Show available commands
 python -m src.index --help
 
-# Show help for specific command
-python -m src.index train --help
+# Show help for MNIST example
+python -m src.index mnist --help
 ```
+
+## 📚 Available Examples
+
+### 1. MNIST Digit Classification (`mnist`)
+- **Description**: Neural network for handwritten digit recognition
+- **Dataset**: MNIST (70,000 images of digits 0-9)
+- **Architecture**: Dense neural network with dropout
+- **Commands**: `train`, `predict`, `info`
+- **Learning Focus**: Basic neural networks, image classification
+
+### Adding New Examples
+
+1. Use the template in `src/examples/_template/`
+2. Follow the established structure
+3. Add CLI commands to `src/index.py`
+4. Include comprehensive documentation
 
 ## ⚙️ Configuration
 
-The project uses a flexible configuration system. You can modify settings in several ways:
+Each example uses a flexible configuration system. You can modify settings in several ways:
 
 ### 1. Environment Variables (.env file)
 ```env
+# MNIST Example
 EPOCHS=10
 BATCH_SIZE=64
 LEARNING_RATE=0.001
-MODEL_SAVE_PATH=models/custom_model.h5
+MODEL_SAVE_PATH=models/mnist_model.h5
 ```
 
 ### 2. Command Line Arguments
 ```bash
-python -m src.index train --epochs 15 --batch-size 128
+python -m src.index mnist train --epochs 15 --batch-size 128
 ```
 
-### 3. Code Configuration (src/config.py)
-Modify the default values in the configuration classes.
+### 3. Code Configuration
+Modify the default values in each example's `config.py` file.
 
 ## 🧪 Testing
 
@@ -198,19 +219,28 @@ python scripts.py lint
 # Clean up generated files
 python scripts.py clean
 
-# Train model
+# Train MNIST model
 python scripts.py train
 
-# Run predictions
+# Run MNIST predictions
 python scripts.py predict
 ```
 
-### Adding New Features
+### Adding New Examples
 
-1. **Data Processing**: Add new preprocessing steps in `src/data/loader.py`
-2. **Model Architecture**: Modify or create new models in `src/models/`
-3. **Training Logic**: Extend training functionality in `src/training/trainer.py`
-4. **CLI Commands**: Add new commands in `src/index.py`
+1. **Create Structure**: Copy the template from `src/examples/_template/`
+2. **Implement Logic**: Add your specific machine learning logic
+3. **Add CLI Commands**: Extend the main CLI in `src/index.py`
+4. **Update Configuration**: Customize `config.py` for your needs
+5. **Write Documentation**: Include learning objectives and usage
+6. **Add Tests**: Include unit tests in the `tests/` directory
+
+### Project Guidelines
+
+- **Isolation**: Each example should be self-contained
+- **Shared Resources**: Use `src.shared` for common utilities
+- **Documentation**: Clear explanations and learning objectives
+- **Configuration**: Flexible and well-documented settings
 
 ## 📚 API Reference
 

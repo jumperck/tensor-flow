@@ -6,10 +6,10 @@ from typing import Optional, Tuple, Dict, Any
 import numpy as np
 import tensorflow as tf
 
-from src.config import Config
-from src.models.classifier import MNISTClassifier
-from src.data.loader import DataLoader
-from src.utils.logger import get_logger
+from ..config import Config
+from ..models.classifier import MNISTClassifier
+from ..data.loader import DataLoader
+from src.shared.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
