@@ -1,0 +1,12 @@
+services:
+  tensorflow-jupyter:
+    image: tensorflow/tensorflow:latest-jupyter
+    ports:
+      - "8888:8888"
+    container_name: tensorflow_jupyter
+    restart: unless-stopped
+    volumes:
+      - ./:/tf
+    environment:
+      - TZ=UTC
+    command: bash -c "jupyter notebook --ip=0.0.0.0 --allow-root --NotebookApp.token='' --NotebookApp.password=''"

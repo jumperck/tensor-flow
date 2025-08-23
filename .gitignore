@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+venv/*
+.env
+.env.*
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.pot
+*.mo
+*.coverage
+.coverage.*
+.cache
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+.mypy_cache/
+.pyre/
+.pytype/
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# macOS
+*.DS_Store
+
+# VS Code
+.vscode/
