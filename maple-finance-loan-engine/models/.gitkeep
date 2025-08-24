@@ -1,0 +1,2 @@
+# Keep this directory structure but ignore model files
+# Model files will be generated during training

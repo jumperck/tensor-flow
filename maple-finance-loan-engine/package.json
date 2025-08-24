@@ -1,0 +1,57 @@
+{
+  "name": "maple-finance-loan-engine",
+  "version": "1.0.0",
+  "description": "Loan decision engine for Maple Finance Inc. - Helping Canadians borrow smarter since 2025",
+  "main": "src/server/app.js",
+  "scripts": {
+    "start": "node src/server/app.js",
+    "dev": "nodemon src/server/app.js",
+    "train": "node src/ml/train.js",
+    "test": "jest",
+    "client": "serve -s client -p 3001"
+  },
+  "keywords": [
+    "loan",
+    "finance",
+    "machine-learning",
+    "decision-engine",
+    "canada"
+  ],
+  "author": "Maple Finance Inc.",
+  "license": "MIT",
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.20.0",
+    "@tensorflow/tfjs-node-gpu": "^4.20.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2",
+    "serve": "^14.2.1",
+    "supertest": "^7.1.4"
+  },
+  "jest": {
+    "testTimeout": 120000,
+    "testEnvironment": "node",
+    "verbose": true,
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": ["text", "lcov", "html"],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/*.test.js",
+      "!coverage/**"
+    ],
+    "testMatch": [
+      "**/tests/**/*.test.js",
+      "**/__tests__/**/*.js",
+      "**/*.(test|spec).js"
+    ],
+    "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"]
+  }
+}

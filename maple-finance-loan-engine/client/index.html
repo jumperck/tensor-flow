@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maple Finance Inc. - Loan Application</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="maple-leaf">🍁</span>
+                    <h1>Maple Finance Inc.</h1>
+                </div>
+                <p class="tagline">Helping Canadians borrow smarter since 2025</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Loan Application Form -->
+            <section id="application-section" class="section">
+                <div class="card">
+                    <h2>Loan Application</h2>
+                    <p class="section-subtitle">Complete the form below to apply for your loan</p>
+                    
+                    <form id="loan-form">
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h3>Personal Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="age">Age *</label>
+                                    <input type="number" id="age" name="age" min="18" max="100" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="province">Province *</label>
+                                    <select id="province" name="province" required>
+                                        <option value="">Select Province</option>
+                                        <option value="ON">Ontario</option>
+                                        <option value="QC">Quebec</option>
+                                        <option value="BC">British Columbia</option>
+                                        <option value="AB">Alberta</option>
+                                        <option value="MB">Manitoba</option>
+                                        <option value="SK">Saskatchewan</option>
+                                        <option value="NS">Nova Scotia</option>
+                                        <option value="NB">New Brunswick</option>
+                                        <option value="NL">Newfoundland and Labrador</option>
+                                        <option value="PE">Prince Edward Island</option>
+                                        <option value="NT">Northwest Territories</option>
+                                        <option value="YT">Yukon</option>
+                                        <option value="NU">Nunavut</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="citizenship">Citizenship Status *</label>
+                                    <select id="citizenship" name="citizenship" required>
+                                        <option value="">Select Status</option>
+                                        <option value="citizen">Canadian Citizen</option>
+                                        <option value="permanent-resident">Permanent Resident</option>
+                                        <option value="work-permit">Work Permit Holder</option>
+                                        <option value="study-permit">Study Permit Holder</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="educationLevel">Education Level *</label>
+                                    <select id="educationLevel" name="educationLevel" required>
+                                        <option value="">Select Education</option>
+                                        <option value="high-school">High School</option>
+                                        <option value="college">College/Trade School</option>
+                                        <option value="bachelor">Bachelor's Degree</option>
+                                        <option value="master">Master's Degree</option>
+                                        <option value="phd">PhD/Doctorate</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Financial Information -->
+                        <div class="form-section">
+                            <h3>Financial Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="annualIncome">Annual Income (CAD) *</label>
+                                    <input type="number" id="annualIncome" name="annualIncome" min="0" step="1000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="creditScore">Credit Score *</label>
+                                    <input type="number" id="creditScore" name="creditScore" min="300" max="900" required>
+                                    <small>Your credit score (300-900)</small>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="employmentYears">Years of Employment *</label>
+                                    <input type="number" id="employmentYears" name="employmentYears" min="0" max="50" step="0.5" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="debtToIncomeRatio">Debt-to-Income Ratio *</label>
+                                    <input type="number" id="debtToIncomeRatio" name="debtToIncomeRatio" min="0" max="1" step="0.01" required>
+                                    <small>As a decimal (e.g., 0.25 for 25%)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Loan Information -->
+                        <div class="form-section">
+                            <h3>Loan Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="loanType">Loan Type *</label>
+                                    <select id="loanType" name="loanType" required>
+                                        <option value="">Select Loan Type</option>
+                                        <option value="personal-unsecured">Personal Loan (Unsecured)</option>
+                                        <option value="personal-secured">Personal Loan (Secured)</option>
+                                        <option value="mortgage">Mortgage</option>
+                                        <option value="auto">Auto Loan</option>
+                                        <option value="student">Student Support Loan</option>
+                                        <option value="line-of-credit">Maple Line of Credit</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="loanAmount">Loan Amount (CAD) *</label>
+                                    <input type="number" id="loanAmount" name="loanAmount" min="1000" step="500" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="hasCollateral">Do you have collateral?</label>
+                                    <select id="hasCollateral" name="hasCollateral">
+                                        <option value="false">No</option>
+                                        <option value="true">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Submit Application</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Decision Section -->
+            <section id="decision-section" class="section hidden">
+                <div class="card">
+                    <h2>Loan Decision</h2>
+                    <div id="decision-content">
+                        <!-- Decision content will be populated by JavaScript -->
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="new-application" class="btn-secondary">New Application</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loan Information Section -->
+            <section class="info-section">
+                <div class="card">
+                    <h2>Loan Types & Rates</h2>
+                    <div class="loan-types">
+                        <div class="loan-type">
+                            <h4>Personal Loans</h4>
+                            <p>$1,000 – $50,000 | 8% – 19% APR</p>
+                        </div>
+                        <div class="loan-type">
+                            <h4>Mortgages</h4>
+                            <p>From $50,000 | 5.5% – 9% APR</p>
+                        </div>
+                        <div class="loan-type">
+                            <h4>Auto Loans</h4>
+                            <p>$5,000 – $80,000 | 7% – 15% APR</p>
+                        </div>
+                        <div class="loan-type">
+                            <h4>Student Support</h4>
+                            <p>Up to $20,000 | Flexible terms</p>
+                        </div>
+                        <div class="loan-type">
+                            <h4>Line of Credit</h4>
+                            <p>$2,000 – $30,000 | Prime + 4%</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Maple Finance Inc. | Licensed lender in all provinces and territories</p>
+            <p>All loans comply with the Criminal Code of Canada (Section 347)</p>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Processing your application...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
