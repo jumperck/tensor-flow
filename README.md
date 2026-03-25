@@ -60,7 +60,7 @@ tensor-flow/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/KaueReinbold/tensor-flow.git
+git clone https://github.com/jumperck/tensor-flow.git
 cd tensor-flow
 ```
 
@@ -289,7 +289,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 **Kaue Reinbold**
-- GitHub: [@KaueReinbold](https://github.com/KaueReinbold)
+- GitHub: [@jumperck](https://github.com/jumperck)
 - Email: your.email@example.com
 
 ---
